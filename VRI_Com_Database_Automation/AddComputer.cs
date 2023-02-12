@@ -47,54 +47,41 @@ namespace VRI_Com_Database_Automation
 
             By add = By.XPath("//*[@id=\"add\"]");
             driver.FindElement(add).Click();
-
             Assert.That(driver.PageSource.Contains("Add a computer"), Is.True);
-
-
 
 
         }
 
 
-        [Test, Order(2) ]
+        [Test, Order(2)]
 
         public void TC02_VerifyComputerNameFieldMandatory()
 
         {
-
             driver.Navigate().GoToUrl("http://computer-database.gatling.io/computers/new");
 
             By name = By.Id("name");
             driver.FindElement(name).Clear();
-
-            
-
             driver.FindElement(By.XPath("//*[@id=\"main\"]/form/div/input")).Click();
 
             Assert.That(driver.PageSource.Contains("Failed to refine type : Predicate isEmpty() did not fail."), Is.True);
 
-            
-
         }
+
 
         [Test, Order(3) ]
 
         public void TC03_VerifyComputerNameAbleToFilled()
 
         {
-
             driver.Navigate().GoToUrl("http://computer-database.gatling.io/computers/new");
 
             By name = By.Id("name");
             driver.FindElement(name).SendKeys("LAPTOP-DA1234B5");
 
-
-            String expectedtitle = "LAPTOP-DA1234B5";
-            String actualtitle = driver.FindElement(By.Id("name")).GetAttribute("value");
-            
-            Assert.That(actualtitle, Is.EqualTo(expectedtitle));
-
-            
+            String expectedname = "LAPTOP-DA1234B5";
+            String actualname = driver.FindElement(By.Id("name")).GetAttribute("value");
+            Assert.That(actualname, Is.EqualTo(expectedname));
 
         }
 
@@ -112,10 +99,10 @@ namespace VRI_Com_Database_Automation
             driver.FindElement(introduced).SendKeys("2023-01-20");
 
 
-            String expectedtitle = "2023-01-20";
-            String actualtitle = driver.FindElement(By.Id("introduced")).GetAttribute("value");
+            String expectedintroduced = "2023-01-20";
+            String actualintroduced = driver.FindElement(By.Id("introduced")).GetAttribute("value");
            
-            Assert.That(actualtitle, Is.EqualTo(expectedtitle));
+            Assert.That(actualintroduced, Is.EqualTo(expectedintroduced));
 
             
 
@@ -172,6 +159,7 @@ namespace VRI_Com_Database_Automation
 
             // select the drop down list
             var company = driver.FindElement(By.Id("company"));
+
             //create select element object 
             var selectElement = new SelectElement(company);
 
